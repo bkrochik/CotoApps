@@ -15,6 +15,8 @@
 		7F193143161BDD56006241DA /* kitchen.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7F193142161BDD56006241DA /* kitchen.jpeg */; };
 		7F19314A161BDF70006241DA /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F193149161BDF70006241DA /* egg.png */; };
 		7F19314C161BDF8A006241DA /* egg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F19314B161BDF8A006241DA /* egg.plist */; };
+		7F32A3F3161CE66900B1880A /* fly.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F32A3F1161CE66900B1880A /* fly.plist */; };
+		7F32A3F4161CE66900B1880A /* fly.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F32A3F2161CE66900B1880A /* fly.png */; };
 		7F336221161C010D007730F1 /* BoilingFoam.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F336212161C010D007730F1 /* BoilingFoam.plist */; };
 		7F336222161C010D007730F1 /* BurstPipe.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F336213161C010D007730F1 /* BurstPipe.plist */; };
 		7F336223161C010D007730F1 /* Comet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F336214161C010D007730F1 /* Comet.plist */; };
@@ -221,6 +223,8 @@
 		7F193142161BDD56006241DA /* kitchen.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = kitchen.jpeg; path = ../kitchen.jpeg; sourceTree = "<group>"; };
 		7F193149161BDF70006241DA /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = egg.png; path = ../egg.png; sourceTree = "<group>"; };
 		7F19314B161BDF8A006241DA /* egg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = egg.plist; sourceTree = "<group>"; };
+		7F32A3F1161CE66900B1880A /* fly.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fly.plist; sourceTree = "<group>"; };
+		7F32A3F2161CE66900B1880A /* fly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly.png; sourceTree = "<group>"; };
 		7F336212161C010D007730F1 /* BoilingFoam.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BoilingFoam.plist; sourceTree = "<group>"; };
 		7F336213161C010D007730F1 /* BurstPipe.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BurstPipe.plist; sourceTree = "<group>"; };
 		7F336214161C010D007730F1 /* Comet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Comet.plist; sourceTree = "<group>"; };
@@ -730,6 +734,8 @@
 		7FA3C541161A11E1006DAC64 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F32A3F1161CE66900B1880A /* fly.plist */,
+				7F32A3F2161CE66900B1880A /* fly.png */,
 				7F336231161C012D007730F1 /* Images */,
 				7F336211161C010D007730F1 /* Particles */,
 				7F0948C4161CD3E000F151DA /* fly2.plist */,
@@ -1353,6 +1359,8 @@
 				7F0948CB161CD3E000F151DA /* fly_move_2.png in Resources */,
 				7F0948CC161CD3E000F151DA /* fly_move_1.png in Resources */,
 				7F0948CD161CD3E000F151DA /* fly_move_3.png in Resources */,
+				7F32A3F3161CE66900B1880A /* fly.plist in Resources */,
+				7F32A3F4161CE66900B1880A /* fly.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

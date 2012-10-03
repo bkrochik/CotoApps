@@ -324,9 +324,9 @@ struct fixtureUserData {
 
 -  ( void ) createFly {
     
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"fly2.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"fly.plist"];
     
-    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"fly2.png"];
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"fly.png"];
     
     NSMutableArray *flyBirdFrames = [NSMutableArray array];
     
@@ -342,20 +342,21 @@ struct fixtureUserData {
     
     CCSprite *bird = [CCSprite spriteWithSpriteFrameName:@"fly_move_1.png"];
     
-    bird.position = ccp(winSize.width/2, winSize.height/2);
+    bird.position = ccp(0, winSize.height/2);
     
     CCAction *flyAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:flybird restoreOriginalFrame:NO]];
     
-    CCAction *moveAction = [CCMoveTo actionWithDuration:8.0 position:ccp(winSize.width, winSize.height/2)];
+    CCAction *moveAction = [CCMoveTo actionWithDuration:8.0 position:ccp(winSize.width-20, winSize.height/3)];
+    
+    CCAction *moveActionBack = [CCMoveTo actionWithDuration:4.0 position:ccp(0, winSize.height -20)];
     
     [bird runAction:flyAction];
     
-    [bird runAction:moveAction];
-    
+    [bird runAction: [CCRepeatForever actionWithAction:[CCSequence actions:moveAction,moveActionBack,nil]]];
     
     [spriteSheet addChild:bird];
     
-    [self addChild:spriteSheet];    
+    [self addChild:spriteSheet];
     
 }
 
