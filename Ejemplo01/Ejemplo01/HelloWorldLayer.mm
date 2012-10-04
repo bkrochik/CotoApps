@@ -57,11 +57,13 @@ struct fixtureUserData {
 -(id) init
 {
     if( (self=[super init])) {
-        CGSize winSize = [CCDirector sharedDirector].winSize;
-        
+        CGSize winSize = [CCDirector sharedDirector].winSizeInPixels;
         //Background
-        CCSprite * bg = [CCSprite spriteWithFile:@"kitchen.jpeg"];
-        bg.position = ccp(0, 200);
+        NSString * bgImg;
+        bgImg=@"kitchen.jpeg";
+        CCSprite * bg = [CCSprite spriteWithFile:bgImg];
+        bg.position = ccp(0,200);
+        bg.scale=CC_CONTENT_SCALE_FACTOR();
         [self addChild:bg z:0];
         
 		// enable events
@@ -73,29 +75,40 @@ struct fixtureUserData {
         score = 0;
         life = 3;
         
-        //Create and add the score label as a child.
+        //Create and add the life label as a child.
         scoreLabel = [CCLabelTTF labelWithString:@"Puntos 0" fontName:@"Marker Felt" fontSize:24];
-        scoreLabel.position = ccp(240, (winSize.height-20));
+        
+        //Create and add the score label as a child.
+        if(CC_CONTENT_SCALE_FACTOR()==1.0f){
+            scoreLabel.position = ccp(240, (winSize.height-20));
+        }else{
+            scoreLabel.position = ccp(winSize.width-(190*CC_CONTENT_SCALE_FACTOR()), winSize.height-(248*CC_CONTENT_SCALE_FACTOR()));
+        }
+        
         [self addChild:scoreLabel z:1];
         
         //Create and add the life label as a child.
         lifeLabel = [CCLabelTTF labelWithString:@"Vidas 3" fontName:@"Marker Felt" fontSize:24];
-        lifeLabel.position = ccp(50, (winSize.height-20));
+        
+        if(CC_CONTENT_SCALE_FACTOR()==1.0f){
+            lifeLabel.position = ccp(50, (winSize.height-20));
+        }else{
+            lifeLabel.position = ccp(winSize.width-(300*CC_CONTENT_SCALE_FACTOR()),winSize.height-(248*CC_CONTENT_SCALE_FACTOR()));
+        }
         [self addChild:lifeLabel z:1];
     }
     
     
     // Create sprite and add it to the layer
-    _pan = [CCSprite spriteWithFile:@"pan.png" rect:CGRectMake(0, 0, 200, 142)];
-    _pan.position = ccp(0, 0);
+    _pan = [CCSprite spriteWithFile:@"pan.png"];
+    _pan.position = ccp(100, 0);
+    _pan.scale=CC_CONTENT_SCALE_FACTOR();
     [self addChild:_pan  z:0 tag:1];
-    
-    
     
     // Create pan body and shape
     b2BodyDef panBodyDef;
     panBodyDef.type = b2_staticBody;
-    panBodyDef.position.Set(100/PTM_RATIO, 20/PTM_RATIO);
+    panBodyDef.position.Set(100/PTM_RATIO, -0);
     panBodyDef.userData = _pan;
     _body = world->CreateBody(&panBodyDef);
     
@@ -192,7 +205,7 @@ struct fixtureUserData {
 	
 	[menu alignItemsVertically];
 	
-	CGSize size = [[CCDirector sharedDirector] winSize];
+	CGSize size = [[CCDirector sharedDirector] winSizeInPixels];
 	[menu setPosition:ccp( size.width/2, size.height/2)];
 	
 	
@@ -201,7 +214,7 @@ struct fixtureUserData {
 
 -(void) initPhysics
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
+    CGSize winSize = [CCDirector sharedDirector].winSizeInPixels;
     
 	// Create a world
     b2Vec2 gravity = b2Vec2(0.0f, -30.0f);
@@ -250,8 +263,10 @@ struct fixtureUserData {
 	[super draw];
 	
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    
+  //  kmGLScalef(1 / CC_CONTENT_SCALE_FACTOR(), 1 / CC_CONTENT_SCALE_FACTOR(), 1);
 	
-	kmGLPushMatrix();
+    kmGLPushMatrix();
 	
 	world->DrawDebugData();
 	
@@ -281,18 +296,21 @@ struct fixtureUserData {
 
 -(void) createBall
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
+    CGSize winSize = [CCDirector sharedDirector].winSizeInPixels;
     CCSprite *_newBall;
-    _newBall = [CCSprite spriteWithFile:@"egg.png" rect:CGRectMake(0, 0, 43, 49)];
-    _newBall.position = ccp(100, 100);
+    _newBall = [CCSprite spriteWithFile:@"egg.png"];
+    _newBall.position = ccp(0, 0);
+    _newBall.scale=CC_CONTENT_SCALE_FACTOR();
     [self addChild:_newBall  z:0 tag:2];
     
     //Random position
-    int maxValue = (int)winSize.width;
+    int maxValue = (int)winSize.width-25;
     int r = rand() % maxValue;
+    r=r/CC_CONTENT_SCALE_FACTOR();
     //Random Height
     int maxHeight = 3;
     int h = (rand() % maxHeight);
+    h=h/CC_CONTENT_SCALE_FACTOR();
     
     // Create ball body and shape new
     b2BodyDef newBallBodyDef;
@@ -319,7 +337,7 @@ struct fixtureUserData {
     short int direction = -1 * CC_RADIANS_TO_DEGREES(degree);
     b2Vec2 force = b2Vec2(direction, myForce);
     body->ApplyAngularImpulse(3);
-    body->ApplyLinearImpulse(force, body->GetWorldCenter());
+   // body->ApplyLinearImpulse(force, body->GetWorldCenter());
 }
 
 -  ( void ) createFly {
@@ -338,7 +356,7 @@ struct fixtureUserData {
     
     CCAnimation *flybird = [CCAnimation animationWithFrames:flyBirdFrames delay:0.1f];
     
-    CGSize winSize = [CCDirector sharedDirector].winSize;
+    CGSize winSize = [CCDirector sharedDirector].winSizeInPixels;
     
     CCSprite *bird = [CCSprite spriteWithSpriteFrameName:@"fly_move_1.png"];
     
@@ -346,13 +364,16 @@ struct fixtureUserData {
     
     CCAction *flyAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:flybird restoreOriginalFrame:NO]];
     
-    CCAction *moveAction = [CCMoveTo actionWithDuration:8.0 position:ccp(winSize.width-20, winSize.height/3)];
+    CCAction *moveAction = [CCMoveTo actionWithDuration:2.0 position:ccp(winSize.width-20, winSize.height/3)];
     
     CCAction *moveActionBack = [CCMoveTo actionWithDuration:4.0 position:ccp(0, winSize.height -20)];
     
+    id flipX = [CCFlipX actionWithFlipX:YES];
+    id flipXX = [CCFlipX actionWithFlipX:NO];
+    
     [bird runAction:flyAction];
     
-    [bird runAction: [CCRepeatForever actionWithAction:[CCSequence actions:moveAction,moveActionBack,nil]]];
+    [bird runAction: [CCRepeatForever actionWithAction:[CCSequence actions:moveAction,flipX,moveActionBack,flipXX,nil]]];
     
     [spriteSheet addChild:bird];
     
@@ -396,8 +417,7 @@ struct fixtureUserData {
             
             if (spriteA.tag==1 && spriteB.tag==2) {
                 int pos =posB.y - posA.y;
-                
-                if(pos >= 2){
+                if(pos >= (2/CC_CONTENT_SCALE_FACTOR())){
                     //Explosion
                     [self createExplosionX:posB];
                     spriteB.tag=100;
@@ -438,7 +458,7 @@ struct fixtureUserData {
         break;
     }
     
-    world->Step(dt, 10, 10);
+    world->Step(dt/CC_CONTENT_SCALE_FACTOR(), 10, 10);
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() !=(void*)-1) {
             CCSprite *spData = (CCSprite *)b->GetUserData();
@@ -452,14 +472,13 @@ struct fixtureUserData {
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
+    CGSize winSize = [CCDirector sharedDirector].winSizeInPixels;
 	for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
 		location = [[CCDirector sharedDirector] convertToGL: location];
-        if (location.x <= winSize.width-40 && location.x >= 30) {
+        if (location.x <= winSize.width-(40/CC_CONTENT_SCALE_FACTOR()) && location.x >= 30/CC_CONTENT_SCALE_FACTOR()) {
             _body->SetTransform(b2Vec2((location.x-50)/PTM_RATIO,0), 0);
         }
-
 	}
 }
 
@@ -468,7 +487,7 @@ struct fixtureUserData {
     emitter_ = [CCParticleFire node];
 	[self addChild:emitter_ z:10];
     
-    emitter_.position = ccp(point.x * PTM_RATIO,point.y*PTM_RATIO);
+    emitter_.position = ccp(point.x * PTM_RATIO,point.y * PTM_RATIO);
     
 	emitter_.texture = [[CCTextureCache sharedTextureCache] addImage:@"fire.pvr"];
     
