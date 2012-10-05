@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7FFCD8FA161E748400C50ACB /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCD8F9161E748400C50ACB /* Terrain.mm */; };
+		7FFCD900161E8D2000C50ACB /* water.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7FFCD8FF161E8D2000C50ACB /* water.jpeg */; };
 		7FFE27C8161E0472003AC7A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE27C7161E0472003AC7A6 /* QuartzCore.framework */; };
 		7FFE27CA161E0472003AC7A6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE27C9161E0472003AC7A6 /* OpenGLES.framework */; };
 		7FFE27CC161E0472003AC7A6 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE27CB161E0472003AC7A6 /* OpenAL.framework */; };
@@ -181,14 +183,16 @@
 		7FFE29EC161E0478003AC7A6 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE29EB161E0478003AC7A6 /* b2Rope.cpp */; };
 		7FFE29F2161E0478003AC7A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE29F1161E0478003AC7A6 /* main.m */; };
 		7FFE29F5161E0478003AC7A6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE29F4161E0478003AC7A6 /* AppDelegate.mm */; };
-		7FFE29F8161E0478003AC7A6 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE29F7161E0478003AC7A6 /* HelloWorldLayer.mm */; };
+		7FFE29F8161E0478003AC7A6 /* WorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE29F7161E0478003AC7A6 /* WorldLayer.mm */; };
 		7FFE29FB161E0478003AC7A6 /* IntroLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE29FA161E0478003AC7A6 /* IntroLayer.mm */; };
 		7FFE29FE161E0478003AC7A6 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE29FD161E0478003AC7A6 /* GLES-Render.mm */; };
 		7FFE2A00161E0478003AC7A6 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFE29FF161E0478003AC7A6 /* blocks.png */; };
-		7FFE2A0D161E07F5003AC7A6 /* Waves1DNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE2A0C161E07F5003AC7A6 /* Waves1DNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7FFCD8F7161E745A00C50ACB /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.h"; sourceTree = "<group>"; };
+		7FFCD8F9161E748400C50ACB /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.mm"; sourceTree = "<group>"; };
+		7FFCD8FF161E8D2000C50ACB /* water.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpeg; sourceTree = "<group>"; };
 		7FFE27C3161E0472003AC7A6 /* Sailboat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sailboat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFE27C7161E0472003AC7A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7FFE27C9161E0472003AC7A6 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -551,15 +555,13 @@
 		7FFE29F1161E0478003AC7A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7FFE29F3161E0478003AC7A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7FFE29F4161E0478003AC7A6 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		7FFE29F6161E0478003AC7A6 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		7FFE29F7161E0478003AC7A6 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
+		7FFE29F6161E0478003AC7A6 /* WorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldLayer.h; sourceTree = "<group>"; };
+		7FFE29F7161E0478003AC7A6 /* WorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WorldLayer.mm; sourceTree = "<group>"; };
 		7FFE29F9161E0478003AC7A6 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		7FFE29FA161E0478003AC7A6 /* IntroLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = IntroLayer.mm; sourceTree = "<group>"; };
 		7FFE29FC161E0478003AC7A6 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		7FFE29FD161E0478003AC7A6 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		7FFE29FF161E0478003AC7A6 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
-		7FFE2A0B161E07F5003AC7A6 /* Waves1DNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waves1DNode.h; sourceTree = "<group>"; };
-		7FFE2A0C161E07F5003AC7A6 /* Waves1DNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waves1DNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -618,15 +620,16 @@
 		7FFE27D9161E0472003AC7A6 /* Sailboat */ = {
 			isa = PBXGroup;
 			children = (
-				7FFE2A0A161E07D8003AC7A6 /* WaterNode */,
 				7FFE29F3161E0478003AC7A6 /* AppDelegate.h */,
 				7FFE29F4161E0478003AC7A6 /* AppDelegate.mm */,
-				7FFE29F6161E0478003AC7A6 /* HelloWorldLayer.h */,
-				7FFE29F7161E0478003AC7A6 /* HelloWorldLayer.mm */,
+				7FFE29F6161E0478003AC7A6 /* WorldLayer.h */,
+				7FFE29F7161E0478003AC7A6 /* WorldLayer.mm */,
 				7FFE29F9161E0478003AC7A6 /* IntroLayer.h */,
 				7FFE29FA161E0478003AC7A6 /* IntroLayer.mm */,
 				7FFE29FC161E0478003AC7A6 /* GLES-Render.h */,
 				7FFE29FD161E0478003AC7A6 /* GLES-Render.mm */,
+				7FFCD8F7161E745A00C50ACB /* Terrain.h */,
+				7FFCD8F9161E748400C50ACB /* Terrain.mm */,
 				7FFE27DA161E0472003AC7A6 /* Resources */,
 				7FFE27F8161E0472003AC7A6 /* libs */,
 				7FFE29EF161E0478003AC7A6 /* Supporting Files */,
@@ -637,6 +640,7 @@
 		7FFE27DA161E0472003AC7A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7FFCD8FF161E8D2000C50ACB /* water.jpeg */,
 				7FFE27DB161E0472003AC7A6 /* Default.png */,
 				7FFE27DD161E0472003AC7A6 /* Default@2x.png */,
 				7FFE27DF161E0472003AC7A6 /* Default-568h@2x.png */,
@@ -1166,15 +1170,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7FFE2A0A161E07D8003AC7A6 /* WaterNode */ = {
-			isa = PBXGroup;
-			children = (
-				7FFE2A0B161E07F5003AC7A6 /* Waves1DNode.h */,
-				7FFE2A0C161E07F5003AC7A6 /* Waves1DNode.m */,
-			);
-			name = WaterNode;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1242,6 +1237,7 @@
 				7FFE27F7161E0472003AC7A6 /* iTunesArtwork in Resources */,
 				7FFE2940161E0476003AC7A6 /* ChangeLog in Resources */,
 				7FFE2A00161E0478003AC7A6 /* blocks.png in Resources */,
+				7FFCD900161E8D2000C50ACB /* water.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1402,10 +1398,10 @@
 				7FFE29EC161E0478003AC7A6 /* b2Rope.cpp in Sources */,
 				7FFE29F2161E0478003AC7A6 /* main.m in Sources */,
 				7FFE29F5161E0478003AC7A6 /* AppDelegate.mm in Sources */,
-				7FFE29F8161E0478003AC7A6 /* HelloWorldLayer.mm in Sources */,
+				7FFE29F8161E0478003AC7A6 /* WorldLayer.mm in Sources */,
 				7FFE29FB161E0478003AC7A6 /* IntroLayer.mm in Sources */,
 				7FFE29FE161E0478003AC7A6 /* GLES-Render.mm in Sources */,
-				7FFE2A0D161E07F5003AC7A6 /* Waves1DNode.m in Sources */,
+				7FFCD8FA161E748400C50ACB /* Terrain.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1521,6 +1517,7 @@
 				7FFE2A05161E0478003AC7A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

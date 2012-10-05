@@ -13,6 +13,8 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "GLES-Render.h"
+//Terrain effects
+#import "Terrain.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -21,11 +23,13 @@
 #define PTM_RATIO 32
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
+@interface WorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
+    Terrain * _terrain;
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
+    int offset;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
