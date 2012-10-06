@@ -4,7 +4,7 @@
 @implementation Terrain
 @synthesize stripes = _stripes;
 
-- (void) generateWaves {
+- (void) generateWaves{
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
@@ -12,14 +12,31 @@
     float minDY = 60;
     int rangeDX = 80;
     int rangeDY = 40;
+    float paddingTop = 20;
+    float paddingBottom = 20;
+    
+    switch (_waveType) {
+        case 1:
+            rangeDX = 80;
+            rangeDY = 1;
+            minDY = 80;
+            minDX = 130;
+            break;
+        case 2:
+            rangeDX = 30;
+            rangeDY = 20;
+            minDY = 100;
+            minDX = 200;
+            break;
+        default:
+            break;
+    }
     
     float x = -minDX;
     float y = winSize.height/2-minDY;
     
     float dy, ny;
     float sign = 1; // +1 - going up, -1 - going  down
-    float paddingTop = 20;
-    float paddingBottom = 20;
     
     for (int i=0; i<kMaxWaveKeyPoints; i++) {
         _waveKeyPoints[i] = CGPointMake(x, y);
@@ -101,7 +118,7 @@
     
 }
 
-- (id)init {
+- (id)init{
     if ((self = [super init])) {
         [self generateWaves];
         //Reset waves
@@ -111,8 +128,35 @@
     }
     return self;
 }
+- (id)initWithWaveType:(int)waveType
+{
+    _waveType=waveType;
+    if ((self = [super init])) {
+        [self generateWaves];
+        //Reset waves
+        [self resetWaveVertices];
+        //Scale
+        switch (waveType) {
+            case 1:
+                self.scale = 0.60;
+                break;
+            case 2:
+                self.scale=0.25;
+                break;
+            default:
+                break;
+        }
+        
+    }
+    return self;
+}
+
++ (id)nodeWithWaveType:(int)waveType{
+    return  [[[self alloc] initWithWaveType:waveType] autorelease];
+}
 
 - (void) draw {
+    //Wave 1
     for(int i = MAX(_fromKeyPointI, 1); i <= _toKeyPointI; ++i) {
         ccDrawColor4F(1.0, 1.0, 1.0, 1.0);
         
@@ -123,7 +167,6 @@
         float da = M_PI / hSegments;
         float ymid = (p0.y + p1.y) / 2;
         float ampl = (p0.y - p1.y) / 2;
-        
         CGPoint pt0, pt1;
         pt0 = p0;
         for (int j = 0; j < hSegments+1; ++j) {

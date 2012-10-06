@@ -25,14 +25,15 @@
 // HelloWorldLayer
 @interface WorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
-    Terrain * _terrain;
+    Terrain * _wave;
+    Terrain * _wave2;
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
     int offset;
 }
 
-// returns a CCScene that contains the HelloWorldLayer as the only child
+// returns a CCScene that contains as the only child
 +(CCScene *) scene;
 
 @end

@@ -53,10 +53,12 @@ enum {
 		// init physics
 		[self initPhysics];
         
+        _wave=[Terrain nodeWithWaveType:1];
         //Generate Terrain
-        _terrain = [Terrain node];
-        [self addChild:_terrain z:1];
-		
+        [self addChild:_wave z:1];
+        _wave2 = [Terrain nodeWithWaveType:2];
+        [self addChild:_wave2 z:1];
+        
 		[self scheduleUpdate];
 	}
 	return self;
@@ -211,7 +213,8 @@ enum {
     }
     offset+=2;
     //move waves
-    [_terrain setOffsetX:offset];
+    [_wave setOffsetX:offset];
+    [_wave2 setOffsetX:offset];
 }
 #pragma mark GameKit delegate
 

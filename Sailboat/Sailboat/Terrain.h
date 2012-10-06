@@ -30,6 +30,7 @@
     CGPoint _waveTexCoords[kMaxWaveVertices];
     int _nBorderVertices;
     CGPoint _borderVertices[kMaxBorderVertices];
+    int _waveType;
 }
 
 @property (retain) CCSprite * stripes;
