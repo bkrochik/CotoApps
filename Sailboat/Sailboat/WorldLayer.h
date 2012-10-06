@@ -30,7 +30,7 @@
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
-    int offset;
+    float offset;
 }
 
 // returns a CCScene that contains as the only child

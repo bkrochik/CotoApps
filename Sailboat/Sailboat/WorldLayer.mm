@@ -8,12 +8,12 @@
 
 // Import the interfaces
 #import "WorldLayer.h"
-
 // Not included in "cocos2d.h"
 #import "CCPhysicsSprite.h"
-
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
+#import "PhysicsSprite.h"
+#import "GB2ShapeCache.h"
 
 enum {
 	kTagParentNode = 1,
@@ -53,11 +53,11 @@ enum {
 		// init physics
 		[self initPhysics];
         
-        _wave=[Terrain nodeWithWaveType:1];
+        _wave=[Terrain nodeWithTerrainType:1:world];
         //Generate Terrain
         [self addChild:_wave z:1];
-        _wave2 = [Terrain nodeWithWaveType:2];
-        [self addChild:_wave2 z:1];
+        //_wave2 = [Terrain nodeWithTerrainType:2:world];
+        //[self addChild:_wave2 z:1];
         
 		[self scheduleUpdate];
 	}
@@ -140,7 +140,7 @@ enum {
 	world->SetContinuousPhysics(true);
 	
 	m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-	//world->SetDebugDraw(m_debugDraw);
+	world->SetDebugDraw(m_debugDraw);
 	
 	uint32 flags = 0;
 	flags += b2Draw::e_shapeBit;
@@ -177,8 +177,8 @@ enum {
 	groundBody->CreateFixture(&groundBox,0);
 	
 	// right
-	groundBox.Set(b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,0));
-	groundBody->CreateFixture(&groundBox,0);
+	//groundBox.Set(b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,0));
+	//groundBody->CreateFixture(&groundBox,0);
 }
 
 -(void) draw
@@ -194,7 +194,7 @@ enum {
 	
 	kmGLPushMatrix();
 	
-	world->DrawDebugData();	 
+	world->DrawDebugData();
 	
 	kmGLPopMatrix();
 }
@@ -211,13 +211,44 @@ enum {
         }
         
     }
-    offset+=2;
+    
     //move waves
+    float PIXELS_PER_SECOND = 100;
+    offset += PIXELS_PER_SECOND * dt;
     [_wave setOffsetX:offset];
-    [_wave2 setOffsetX:offset];
+    self.position = CGPointMake(-offset*self.scale, 0);
+    
+    //[_wave2 setOffsetX:offsetWave2];
 }
-#pragma mark GameKit delegate
+-(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    for( UITouch *touch in touches ) {
+		CGPoint location = [touch locationInView: [touch view]];
+		location = [[CCDirector sharedDirector] convertToGL: location];
+        [self createBall:location];
+	}
+}
 
+-(void) createBall:(CGPoint)p
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    CCSprite *_newBall;
+    _newBall = [CCSprite spriteWithFile:@"egg.png" rect:CGRectMake(0, 0, 43, 49)];
+    _newBall.position = ccp(100, 100);
+    [self addChild:_newBall  z:0 tag:2];
+    
+    // Create ball body and shape new
+    b2BodyDef newBallBodyDef;
+    newBallBodyDef.type = b2_dynamicBody;
+    newBallBodyDef.position.Set((p.x+offset)/PTM_RATIO,p.y/PTM_RATIO);
+    newBallBodyDef.userData = _newBall;
+    b2Body *body = world->CreateBody(&newBallBodyDef);
+    
+    [[GB2ShapeCache sharedShapeCache]   addShapesWithFile:@"egg.plist"];
+    [[GB2ShapeCache sharedShapeCache] addFixturesToBody:body forShapeName:@"egg"];
+    [_newBall setAnchorPoint: [[GB2ShapeCache sharedShapeCache] anchorPointForShape:@"egg"]];
+}
+
+#pragma mark GameKit delegate
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
 {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];

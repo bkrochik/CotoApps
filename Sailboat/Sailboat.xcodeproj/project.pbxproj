@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F8824C2161FDF1100A2FD41 /* GB2ShapeCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */; };
+		7F8824C6161FDF3D00A2FD41 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C5161FDF3D00A2FD41 /* PhysicsSprite.mm */; };
+		7F8824C9161FDF5C00A2FD41 /* egg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F8824C7161FDF5C00A2FD41 /* egg.plist */; };
+		7F8824CA161FDF5C00A2FD41 /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8824C8161FDF5C00A2FD41 /* egg.png */; };
 		7FFCD8FA161E748400C50ACB /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCD8F9161E748400C50ACB /* Terrain.mm */; };
 		7FFCD900161E8D2000C50ACB /* water.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7FFCD8FF161E8D2000C50ACB /* water.jpeg */; };
 		7FFE27C8161E0472003AC7A6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFE27C7161E0472003AC7A6 /* QuartzCore.framework */; };
@@ -190,6 +194,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F8824C0161FDF1100A2FD41 /* GB2ShapeCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GB2ShapeCache.h; sourceTree = "<group>"; };
+		7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GB2ShapeCache.mm; sourceTree = "<group>"; };
+		7F8824C4161FDF3D00A2FD41 /* PhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
+		7F8824C5161FDF3D00A2FD41 /* PhysicsSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
+		7F8824C7161FDF5C00A2FD41 /* egg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = egg.plist; sourceTree = "<group>"; };
+		7F8824C8161FDF5C00A2FD41 /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = egg.png; sourceTree = "<group>"; };
 		7FFCD8F7161E745A00C50ACB /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.h"; sourceTree = "<group>"; };
 		7FFCD8F9161E748400C50ACB /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.mm"; sourceTree = "<group>"; };
 		7FFCD8FF161E8D2000C50ACB /* water.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpeg; sourceTree = "<group>"; };
@@ -584,6 +594,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F8824BF161FDF1100A2FD41 /* generic-box2d-plist */ = {
+			isa = PBXGroup;
+			children = (
+				7F8824C4161FDF3D00A2FD41 /* PhysicsSprite.h */,
+				7F8824C5161FDF3D00A2FD41 /* PhysicsSprite.mm */,
+				7F8824C0161FDF1100A2FD41 /* GB2ShapeCache.h */,
+				7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */,
+			);
+			path = "generic-box2d-plist";
+			sourceTree = "<group>";
+		};
 		7FFE27B8161E0471003AC7A6 = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +641,7 @@
 		7FFE27D9161E0472003AC7A6 /* Sailboat */ = {
 			isa = PBXGroup;
 			children = (
+				7F8824BF161FDF1100A2FD41 /* generic-box2d-plist */,
 				7FFE29F3161E0478003AC7A6 /* AppDelegate.h */,
 				7FFE29F4161E0478003AC7A6 /* AppDelegate.mm */,
 				7FFE29F6161E0478003AC7A6 /* WorldLayer.h */,
@@ -640,6 +662,8 @@
 		7FFE27DA161E0472003AC7A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F8824C7161FDF5C00A2FD41 /* egg.plist */,
+				7F8824C8161FDF5C00A2FD41 /* egg.png */,
 				7FFCD8FF161E8D2000C50ACB /* water.jpeg */,
 				7FFE27DB161E0472003AC7A6 /* Default.png */,
 				7FFE27DD161E0472003AC7A6 /* Default@2x.png */,
@@ -1238,6 +1262,8 @@
 				7FFE2940161E0476003AC7A6 /* ChangeLog in Resources */,
 				7FFE2A00161E0478003AC7A6 /* blocks.png in Resources */,
 				7FFCD900161E8D2000C50ACB /* water.jpeg in Resources */,
+				7F8824C9161FDF5C00A2FD41 /* egg.plist in Resources */,
+				7F8824CA161FDF5C00A2FD41 /* egg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1402,6 +1428,8 @@
 				7FFE29FB161E0478003AC7A6 /* IntroLayer.mm in Sources */,
 				7FFE29FE161E0478003AC7A6 /* GLES-Render.mm in Sources */,
 				7FFCD8FA161E748400C50ACB /* Terrain.mm in Sources */,
+				7F8824C2161FDF1100A2FD41 /* GB2ShapeCache.mm in Sources */,
+				7F8824C6161FDF3D00A2FD41 /* PhysicsSprite.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,7 +4,7 @@
 @implementation Terrain
 @synthesize stripes = _stripes;
 
-- (void) generateWaves{
+- (void) generateTerrain{
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
@@ -12,10 +12,8 @@
     float minDY = 60;
     int rangeDX = 80;
     int rangeDY = 40;
-    float paddingTop = 20;
-    float paddingBottom = 20;
     
-    switch (_waveType) {
+    switch (_terrainType) {
         case 1:
             rangeDX = 80;
             rangeDY = 1;
@@ -34,9 +32,11 @@
     
     float x = -minDX;
     float y = winSize.height/2-minDY;
-    
+
     float dy, ny;
     float sign = 1; // +1 - going up, -1 - going  down
+    float paddingTop = 20;
+    float paddingBottom = 20;
     
     for (int i=0; i<kMaxWaveKeyPoints; i++) {
         _waveKeyPoints[i] = CGPointMake(x, y);
@@ -59,9 +59,32 @@
     
 }
 
-- (void) resetWaveVertices {
+- (void) resetBox2DBody {
+    if(_body) {
+        _world->DestroyBody(_body);
+    }
     
-    CGSize winSize = [CCDirector sharedDirector].winSize;
+    b2BodyDef bd;
+    bd.position.Set(0, 0);
+    
+    _body = _world->CreateBody(&bd);
+    
+    b2EdgeShape shape;
+    
+    b2Vec2 p1, p2;
+    for (int i=0; i<_nBorderVertices-1; i++) {
+        p1 = b2Vec2(_borderVertices[i].x/PTM_RATIO,_borderVertices[i].y/PTM_RATIO);
+        p2 = b2Vec2(_borderVertices[i+1].x/PTM_RATIO,_borderVertices[i+1].y/PTM_RATIO);
+
+        // Create fixtures for the four borders (the border shape is re-used)
+        shape.Set(p1, p2);
+        _body->CreateFixture(&shape, 0);
+    }
+}
+
+- (void) resetTerrainVertices {
+    
+    CGSize winSize = [CCDirector sharedDirector].winSizeInPixels;
     
     static int prevFromKeyPointI = -1;
     static int prevToKeyPointI = -1;
@@ -113,30 +136,37 @@
         }
         
         prevFromKeyPointI = _fromKeyPointI;
-        prevToKeyPointI = _toKeyPointI;        
+        prevToKeyPointI = _toKeyPointI;
+        
+        switch (_terrainType) {
+            case 1:
+                [self resetBox2DBody];
+                break;
+            default:
+                break;
+        }
     }
     
 }
 
-- (id)init{
-    if ((self = [super init])) {
-        [self generateWaves];
-        //Reset waves
-        [self resetWaveVertices];
-        //Scale
-        self.scale = 0.50;
-    }
-    return self;
-}
-- (id)initWithWaveType:(int)waveType
+- (id)initWithTerrainType:(int)terrainType:(b2World *)world
 {
-    _waveType=waveType;
+    _world = world;
+    _terrainType=terrainType;
+    m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+//	_world->SetDebugDraw(m_debugDraw);
+    
+    uint32 flags = 0;
+	flags += b2Draw::e_shapeBit;
+	//		flags += b2Draw::e_jointBit;
+	//		flags += b2Draw::e_aabbBit;
+	//		flags += b2Draw::e_pairBit;
+	//		flags += b2Draw::e_centerOfMassBit;
+	m_debugDraw->SetFlags(flags);
+
     if ((self = [super init])) {
-        [self generateWaves];
-        //Reset waves
-        [self resetWaveVertices];
         //Scale
-        switch (waveType) {
+        switch (terrainType) {
             case 1:
                 self.scale = 0.60;
                 break;
@@ -146,61 +176,42 @@
             default:
                 break;
         }
+        [self generateTerrain];
+        //Reset waves
+        [self resetTerrainVertices];
         
     }
     return self;
 }
 
-+ (id)nodeWithWaveType:(int)waveType{
-    return  [[[self alloc] initWithWaveType:waveType] autorelease];
++ (id)nodeWithTerrainType:(int)terrainType:(b2World *)world{
+    return  [[[self alloc] initWithTerrainType:terrainType:world] autorelease];
 }
 
 - (void) draw {
-    //Wave 1
-    for(int i = MAX(_fromKeyPointI, 1); i <= _toKeyPointI; ++i) {
-        ccDrawColor4F(1.0, 1.0, 1.0, 1.0);
-        
-        CGPoint p0 = _waveKeyPoints[i-1];
-        CGPoint p1 = _waveKeyPoints[i];
-        int hSegments = floorf((p1.x-p0.x)/kWaveSegmentWidth);
-        float dx = (p1.x - p0.x) / hSegments;
-        float da = M_PI / hSegments;
-        float ymid = (p0.y + p1.y) / 2;
-        float ampl = (p0.y - p1.y) / 2;
-        CGPoint pt0, pt1;
-        pt0 = p0;
-        for (int j = 0; j < hSegments+1; ++j) {
-            
-            pt1.x = p0.x + j*dx;
-            pt1.y = ymid + ampl * cosf(da*j);
-            
-            ccDrawLine(pt0, pt1);
-            
-            pt0 = pt1;
-            
-        }
-    }
-    //glBindTexture(GL_TEXTURE_2D, _stripes.texture.name);
-    
-   /* ccDrawColor4F(1, 1, 1, 1);
-    
-    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, _waveVertices);
+    /*
+    glBindTexture(GL_TEXTURE_2D, _stripes.texture.name);
+    ccDrawColor4F(1, 1, 1, 1);
+    glEnableVertexAttribArray(kCCVertexAttribFlag_Position);
+    glVertexAttribPointer(kCCVertexAttrib_Position,3, GL_FLOAT, GL_FALSE, kQuadSize, _waveVertices);
+    glEnableVertexAttribArray(kCCVertexAttrib_TexCoords);
     glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, _waveTexCoords);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)_nWaveVertices);*/
-    
-
 }
 
 - (void) setOffsetX:(float)newOffsetX {
     _offsetX = newOffsetX;
-    self.position = CGPointMake(-_offsetX*self.scale, 0);
+  //  self.position = CGPointMake(-_offsetX*self.scale, 0);
     //reset waves
-    [self resetWaveVertices];
+    [self resetTerrainVertices];
 }
 
 - (void)dealloc {
     [_stripes release];
     _stripes = NULL;
     [super dealloc];
+    
+    delete m_debugDraw;
+	m_debugDraw = NULL;
 }
 @end
