@@ -66,9 +66,9 @@
     
     b2BodyDef bd;
     bd.position.Set(0, 0);
-    
+
     _body = _world->CreateBody(&bd);
-    
+ 
     b2EdgeShape shape;
     
     b2Vec2 p1, p2;
@@ -81,6 +81,19 @@
         _body->CreateFixture(&shape, 0);
     }
 }
+-(void)setupDebugDraw{
+    m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+	_world->SetDebugDraw(m_debugDraw);
+	
+	uint32 flags = 0;
+	flags += b2Draw::e_shapeBit;
+	//		flags += b2Draw::e_jointBit;
+	//		flags += b2Draw::e_aabbBit;
+	//		flags += b2Draw::e_pairBit;
+	//		flags += b2Draw::e_centerOfMassBit;
+	m_debugDraw->SetFlags(flags);
+	
+}
 
 - (void) resetTerrainVertices {
     
@@ -90,10 +103,10 @@
     static int prevToKeyPointI = -1;
     
     // key points interval for drawing
-    while (_waveKeyPoints[_fromKeyPointI+1].x < _offsetX-winSize.width/8/self.scale) {
+    while (_waveKeyPoints[_fromKeyPointI+1].x < _offsetX-winSize.width/4/self.scale) {
         _fromKeyPointI++;
     }
-    while (_waveKeyPoints[_toKeyPointI].x < _offsetX+winSize.width*9/8/self.scale) {
+    while (_waveKeyPoints[_toKeyPointI].x < _offsetX+winSize.width*9/4/self.scale) {
         _toKeyPointI++;
     }
     if (prevFromKeyPointI != _fromKeyPointI || prevToKeyPointI != _toKeyPointI) {
@@ -153,22 +166,12 @@
 {
     _world = world;
     _terrainType=terrainType;
-    m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-//	_world->SetDebugDraw(m_debugDraw);
     
-    uint32 flags = 0;
-	flags += b2Draw::e_shapeBit;
-	//		flags += b2Draw::e_jointBit;
-	//		flags += b2Draw::e_aabbBit;
-	//		flags += b2Draw::e_pairBit;
-	//		flags += b2Draw::e_centerOfMassBit;
-	m_debugDraw->SetFlags(flags);
-
     if ((self = [super init])) {
         //Scale
         switch (terrainType) {
             case 1:
-                self.scale = 0.60;
+                self.scale = 1;
                 break;
             case 2:
                 self.scale=0.25;
@@ -176,7 +179,10 @@
             default:
                 break;
         }
+        
+        [self setupDebugDraw];
         [self generateTerrain];
+        
         //Reset waves
         [self resetTerrainVertices];
         
@@ -189,19 +195,22 @@
 }
 
 - (void) draw {
-    /*
-    glBindTexture(GL_TEXTURE_2D, _stripes.texture.name);
-    ccDrawColor4F(1, 1, 1, 1);
-    glEnableVertexAttribArray(kCCVertexAttribFlag_Position);
-    glVertexAttribPointer(kCCVertexAttrib_Position,3, GL_FLOAT, GL_FALSE, kQuadSize, _waveVertices);
-    glEnableVertexAttribArray(kCCVertexAttrib_TexCoords);
-    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, _waveTexCoords);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)_nWaveVertices);*/
+    [super draw];
+    brushTexture = [[CCTextureCache sharedTextureCache] addImage:@"Default.png"];
+    [brushTexture setAliasTexParameters];
+    ccDrawTexturePoly(_waveVertices, _nWaveVertices, false,brushTexture.name);
+ 
+    kmGLPushMatrix();
+
+   // _world->DrawDebugData();
+
+    kmGLPopMatrix();
+
 }
 
 - (void) setOffsetX:(float)newOffsetX {
     _offsetX = newOffsetX;
-  //  self.position = CGPointMake(-_offsetX*self.scale, 0);
+    //self.position = CGPointMake(-_offsetX*self.scale, 0);
     //reset waves
     [self resetTerrainVertices];
 }

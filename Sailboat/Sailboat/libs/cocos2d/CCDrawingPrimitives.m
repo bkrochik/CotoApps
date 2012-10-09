@@ -166,7 +166,7 @@ void ccDrawSolidRect( CGPoint origin, CGPoint destination, ccColor4F color )
 	ccDrawSolidPoly(vertices, 4, color );
 }
 
-void ccDrawPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolygon )
+void ccDrawPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolygon)
 {
 	lazy_init();
 
@@ -196,6 +196,44 @@ void ccDrawPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 		glDrawArrays(GL_LINE_LOOP, 0, (GLsizei) numberOfPoints);
 	else
 		glDrawArrays(GL_LINE_STRIP, 0, (GLsizei) numberOfPoints);
+	
+	CC_INCREMENT_GL_DRAWS(1);
+}
+
+void ccDrawTexturePoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolygon ,GLint textureId)
+{
+	lazy_init();
+    
+	[shader_ use];
+	[shader_ setUniformsForBuiltins];
+	[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color_.r count:1];
+    
+    ccGLBindTexture2D(textureId);
+    
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_PosColorTex);
+    
+	// XXX: Mac OpenGL error. arrays can't go out of scope before draw is executed
+	ccVertex2F newPoli[numberOfPoints];
+    
+	// iPhone and 32-bit machines optimization
+	if( sizeof(CGPoint) == sizeof(ccVertex2F) ){
+		glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, poli);
+        glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, poli);
+    }
+	else
+    {
+		// Mac on 64-bit
+		for( NSUInteger i=0; i<numberOfPoints;i++)
+			newPoli[i] = (ccVertex2F) { poli[i].x, poli[i].y };
+        
+		glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, newPoli);
+        glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, newPoli);
+	}
+    
+	if( closePolygon )
+		glDrawArrays(GL_LINE_LOOP, 0, (GLsizei) numberOfPoints);
+	else
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) numberOfPoints);
 	
 	CC_INCREMENT_GL_DRAWS(1);
 }

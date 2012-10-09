@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F78D67C162213A20036A3BB /* Noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F78D67B162213A20036A3BB /* Noise.png */; };
 		7F8824C2161FDF1100A2FD41 /* GB2ShapeCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */; };
 		7F8824C6161FDF3D00A2FD41 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C5161FDF3D00A2FD41 /* PhysicsSprite.mm */; };
 		7F8824C9161FDF5C00A2FD41 /* egg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F8824C7161FDF5C00A2FD41 /* egg.plist */; };
@@ -194,6 +195,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F78D67B162213A20036A3BB /* Noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Noise.png; sourceTree = "<group>"; };
 		7F8824C0161FDF1100A2FD41 /* GB2ShapeCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GB2ShapeCache.h; sourceTree = "<group>"; };
 		7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GB2ShapeCache.mm; sourceTree = "<group>"; };
 		7F8824C4161FDF3D00A2FD41 /* PhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 		7FFE27DA161E0472003AC7A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F78D67B162213A20036A3BB /* Noise.png */,
 				7F8824C7161FDF5C00A2FD41 /* egg.plist */,
 				7F8824C8161FDF5C00A2FD41 /* egg.png */,
 				7FFCD8FF161E8D2000C50ACB /* water.jpeg */,
@@ -1264,6 +1267,7 @@
 				7FFCD900161E8D2000C50ACB /* water.jpeg in Resources */,
 				7F8824C9161FDF5C00A2FD41 /* egg.plist in Resources */,
 				7F8824CA161FDF5C00A2FD41 /* egg.png in Resources */,
+				7F78D67C162213A20036A3BB /* Noise.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

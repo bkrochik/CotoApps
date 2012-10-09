@@ -28,7 +28,7 @@
     
     CGPoint _waveKeyPoints[kMaxWaveKeyPoints];
     CCSprite *_stripes;
-  
+    CCTexture2D *brushTexture;
     int _nWaveVertices;
     CGPoint _waveVertices[kMaxWaveVertices];
     CGPoint _waveTexCoords[kMaxWaveVertices];

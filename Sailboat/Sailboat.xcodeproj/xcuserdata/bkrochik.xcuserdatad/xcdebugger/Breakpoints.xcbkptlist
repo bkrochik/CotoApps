@@ -8,20 +8,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371096372.414192"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "51"
-         endingLineNumber = "51"
-         landmarkName = "-init"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371096372.414192"
+         timestampString = "371349225.712775"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "50"
@@ -33,38 +20,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.mm"
-         timestampString = "371174782.008863"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "9"
-         endingLineNumber = "9"
-         landmarkName = "-generateTerrain"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.mm"
-         timestampString = "371195864.739352"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "138"
-         endingLineNumber = "138"
-         landmarkName = "-resetTerrainVertices"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371174197.032337"
+         timestampString = "371349225.712775"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "58"
-         endingLineNumber = "58"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -72,13 +33,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Sailboat/Terrain.mm"
-         timestampString = "371197096.410414"
+         filePath = "../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.mm"
+         timestampString = "371351090.803969"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
-         landmarkName = "-initWithTerrainType::"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
+         landmarkName = "-resetTerrainVertices"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -86,24 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/Terrain.mm"
-         timestampString = "371197096.410414"
+         timestampString = "371454208.666727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
-         landmarkName = "-initWithTerrainType::"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Sailboat/Terrain.mm"
-         timestampString = "371197096.410414"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "188"
-         endingLineNumber = "188"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "+nodeWithTerrainType::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371183142.295551"
+         timestampString = "371351189.333295"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,7 +73,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/Terrain.mm"
-         timestampString = "371187205.667095"
+         timestampString = "371351090.803969"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "63"
@@ -138,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371197794.704048"
+         timestampString = "371349225.712775"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,12 +99,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371197797.365749"
+         timestampString = "371351189.333295"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
-         landmarkName = "-init"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
+         landmarkName = "-update:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Sailboat/Terrain.mm"
+         timestampString = "371351090.803969"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "166"
+         endingLineNumber = "166"
+         landmarkName = "-initWithTerrainType::"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -31,6 +31,8 @@
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
     float offset;
+    CCSprite * _background;
+    Terrain * _terrain;
 }
 
 // returns a CCScene that contains as the only child
