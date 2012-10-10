@@ -33,6 +33,8 @@
     float offset;
     CCSprite * _background;
     Terrain * _terrain;
+    float width;
+    float height;
 }
 
 // returns a CCScene that contains as the only child

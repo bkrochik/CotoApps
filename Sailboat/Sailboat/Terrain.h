@@ -21,6 +21,8 @@
 #define kMaxBorderVertices 800
 #define kQuadSize sizeof(quad_t)
 
+#define NUM_SEGMENTS 20
+
 @interface Terrain : CCNode {
     int _offsetX;
     int _fromKeyPointI;
@@ -28,7 +30,8 @@
     
     CGPoint _waveKeyPoints[kMaxWaveKeyPoints];
     CCSprite *_stripes;
-    CCTexture2D *brushTexture;
+    GLint waveTex;
+    
     int _nWaveVertices;
     CGPoint _waveVertices[kMaxWaveVertices];
     CGPoint _waveTexCoords[kMaxWaveVertices];
@@ -41,6 +44,9 @@
     b2World *_world;
     b2Body *_body;
     GLESDebugDraw * _debugDraw;
+    
+    // Texture
+    CCTexture2D *texture;
 }
 
 @property (retain) CCSprite * stripes;

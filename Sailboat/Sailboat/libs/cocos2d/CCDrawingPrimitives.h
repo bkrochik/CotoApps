@@ -95,7 +95,7 @@ void ccDrawSolidRect( CGPoint origin, CGPoint destination, ccColor4F color );
  The polygon can be closed or open
  */
 void ccDrawPoly( const CGPoint *vertices, NSUInteger numOfVertices, BOOL closePolygon );
-void ccDrawTexturePoly( const CGPoint *vertices, NSUInteger numOfVertices, BOOL closePolygon ,GLint textureId);
+void ccDrawTexturePoly( const CGPoint *vertices, NSUInteger numOfVertices, BOOL closePolygon ,GLint textureId,const CGPoint *texVert);
 
 /** draws a solid polygon given a pointer to CGPoint coordinates, the number of vertices measured in points, and a color.
  */

@@ -16,7 +16,7 @@
     switch (_terrainType) {
         case 1:
             rangeDX = 80;
-            rangeDY = 1;
+            rangeDY = 50;
             minDY = 80;
             minDX = 130;
             break;
@@ -97,7 +97,7 @@
 
 - (void) resetTerrainVertices {
     
-    CGSize winSize = [CCDirector sharedDirector].winSizeInPixels;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     
     static int prevFromKeyPointI = -1;
     static int prevToKeyPointI = -1;
@@ -166,7 +166,8 @@
 {
     _world = world;
     _terrainType=terrainType;
-    
+    texture = [[CCTextureCache sharedTextureCache] addImage:@"water.jpeg"];
+
     if ((self = [super init])) {
         //Scale
         switch (terrainType) {
@@ -196,10 +197,24 @@
 
 - (void) draw {
     [super draw];
-    brushTexture = [[CCTextureCache sharedTextureCache] addImage:@"Default.png"];
-    [brushTexture setAliasTexParameters];
-    ccDrawTexturePoly(_waveVertices, _nWaveVertices, false,brushTexture.name);
- 
+    
+    // Enable texture mapping stuff
+    self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
+    CC_NODE_DRAW_SETUP();
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
+    
+    // Bind the OpenGL texture
+    ccGLBindTexture2D([texture name]);
+    
+    // Send the texture coordinates to OpenGL
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, _waveTexCoords);
+    
+    // Send the polygon coordinates to OpenGL
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_TRUE, kQuadSize, _waveVertices);
+    
+    // Draw it
+    glDrawArrays(GL_TRIANGLE_STRIP, 0,_nWaveVertices);
+    
     kmGLPushMatrix();
 
    // _world->DrawDebugData();
