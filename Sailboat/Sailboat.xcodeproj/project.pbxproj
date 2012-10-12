@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01E0F725162602BE00CF5B48 /* MiniGameCutBird.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01E0F724162602BE00CF5B48 /* MiniGameCutBird.mm */; };
+		01E0F7331626669200CF5B48 /* coast.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 01E0F7321626669200CF5B48 /* coast.jpeg */; };
+		01E0F7371626672E00CF5B48 /* fly.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01E0F7351626672E00CF5B48 /* fly.plist */; };
+		01E0F7381626672E00CF5B48 /* fly.png in Resources */ = {isa = PBXBuildFile; fileRef = 01E0F7361626672E00CF5B48 /* fly.png */; };
+		01E0F73E1626757600CF5B48 /* streak.png in Resources */ = {isa = PBXBuildFile; fileRef = 01E0F73D1626757600CF5B48 /* streak.png */; };
 		7F7F004016251F83009CE386 /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7F7F003F16251F83009CE386 /* background.jpeg */; };
 		7F8824C2161FDF1100A2FD41 /* GB2ShapeCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */; };
 		7F8824C6161FDF3D00A2FD41 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C5161FDF3D00A2FD41 /* PhysicsSprite.mm */; };
@@ -195,6 +200,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01E0F7201626025A00CF5B48 /* MiniGameCutBird.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiniGameCutBird.h; sourceTree = "<group>"; };
+		01E0F724162602BE00CF5B48 /* MiniGameCutBird.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiniGameCutBird.mm; sourceTree = "<group>"; };
+		01E0F7321626669200CF5B48 /* coast.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coast.jpeg; sourceTree = "<group>"; };
+		01E0F7351626672E00CF5B48 /* fly.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fly.plist; path = Resources/fly.plist; sourceTree = "<group>"; };
+		01E0F7361626672E00CF5B48 /* fly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fly.png; path = Resources/fly.png; sourceTree = "<group>"; };
+		01E0F73D1626757600CF5B48 /* streak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = streak.png; path = Resources/streak.png; sourceTree = "<group>"; };
 		7F7F003F16251F83009CE386 /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
 		7F8824C0161FDF1100A2FD41 /* GB2ShapeCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GB2ShapeCache.h; sourceTree = "<group>"; };
 		7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GB2ShapeCache.mm; sourceTree = "<group>"; };
@@ -202,8 +213,8 @@
 		7F8824C5161FDF3D00A2FD41 /* PhysicsSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		7F8824C7161FDF5C00A2FD41 /* egg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = egg.plist; sourceTree = "<group>"; };
 		7F8824C8161FDF5C00A2FD41 /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = egg.png; sourceTree = "<group>"; };
-		7FFCD8F7161E745A00C50ACB /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.h"; sourceTree = "<group>"; };
-		7FFCD8F9161E748400C50ACB /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Terrain.mm"; sourceTree = "<group>"; };
+		7FFCD8F7161E745A00C50ACB /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
+		7FFCD8F9161E748400C50ACB /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
 		7FFCD8FF161E8D2000C50ACB /* water.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpeg; sourceTree = "<group>"; };
 		7FFE27C3161E0472003AC7A6 /* Sailboat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sailboat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFE27C7161E0472003AC7A6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -657,6 +668,8 @@
 				7FFE27DA161E0472003AC7A6 /* Resources */,
 				7FFE27F8161E0472003AC7A6 /* libs */,
 				7FFE29EF161E0478003AC7A6 /* Supporting Files */,
+				01E0F7201626025A00CF5B48 /* MiniGameCutBird.h */,
+				01E0F724162602BE00CF5B48 /* MiniGameCutBird.mm */,
 			);
 			path = Sailboat;
 			sourceTree = "<group>";
@@ -664,6 +677,10 @@
 		7FFE27DA161E0472003AC7A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01E0F73D1626757600CF5B48 /* streak.png */,
+				01E0F7351626672E00CF5B48 /* fly.plist */,
+				01E0F7361626672E00CF5B48 /* fly.png */,
+				01E0F7321626669200CF5B48 /* coast.jpeg */,
 				7F8824C7161FDF5C00A2FD41 /* egg.plist */,
 				7F8824C8161FDF5C00A2FD41 /* egg.png */,
 				7F7F003F16251F83009CE386 /* background.jpeg */,
@@ -1268,6 +1285,10 @@
 				7F8824C9161FDF5C00A2FD41 /* egg.plist in Resources */,
 				7F8824CA161FDF5C00A2FD41 /* egg.png in Resources */,
 				7F7F004016251F83009CE386 /* background.jpeg in Resources */,
+				01E0F7331626669200CF5B48 /* coast.jpeg in Resources */,
+				01E0F7371626672E00CF5B48 /* fly.plist in Resources */,
+				01E0F7381626672E00CF5B48 /* fly.png in Resources */,
+				01E0F73E1626757600CF5B48 /* streak.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1434,6 +1455,7 @@
 				7FFCD8FA161E748400C50ACB /* Terrain.mm in Sources */,
 				7F8824C2161FDF1100A2FD41 /* GB2ShapeCache.mm in Sources */,
 				7F8824C6161FDF3D00A2FD41 /* PhysicsSprite.mm in Sources */,
+				01E0F725162602BE00CF5B48 /* MiniGameCutBird.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
