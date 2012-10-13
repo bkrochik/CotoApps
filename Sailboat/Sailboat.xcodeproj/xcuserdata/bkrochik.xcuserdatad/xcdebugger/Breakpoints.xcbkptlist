@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371533138.992477"
+         timestampString = "371854896.56894"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sailboat/WorldLayer.mm"
-         timestampString = "371533138.992477"
+         timestampString = "371854896.56894"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "176"
-         endingLineNumber = "176"
+         startingLineNumber = "179"
+         endingLineNumber = "179"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -118,6 +118,32 @@
          startingLineNumber = "166"
          endingLineNumber = "166"
          landmarkName = "-initWithTerrainType::"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Sailboat/PRKit/PolygonSprite.mm"
+         timestampString = "371701727.188882"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
+         landmarkName = "-nodeToParentTransform"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Boat.mm"
+         timestampString = "371855035.020488"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "21"
+         endingLineNumber = "21"
+         landmarkName = "-initWithBoatType::"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

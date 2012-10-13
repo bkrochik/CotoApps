@@ -12,6 +12,14 @@
 		01E0F7371626672E00CF5B48 /* fly.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01E0F7351626672E00CF5B48 /* fly.plist */; };
 		01E0F7381626672E00CF5B48 /* fly.png in Resources */ = {isa = PBXBuildFile; fileRef = 01E0F7361626672E00CF5B48 /* fly.png */; };
 		01E0F73E1626757600CF5B48 /* streak.png in Resources */ = {isa = PBXBuildFile; fileRef = 01E0F73D1626757600CF5B48 /* streak.png */; };
+		01E0F74E1626789000CF5B48 /* PolygonSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01E0F7451626789000CF5B48 /* PolygonSprite.mm */; };
+		01E0F74F1626789000CF5B48 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E0F7471626789000CF5B48 /* PRFilledPolygon.m */; };
+		01E0F7501626789000CF5B48 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01E0F7491626789000CF5B48 /* PRRatcliffTriangulator.mm */; };
+		01E0F7511626789000CF5B48 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01E0F74B1626789000CF5B48 /* triangulate.cpp */; };
+		7F260755162A0B540030A437 /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F260754162A0B540030A437 /* ship.png */; };
+		7F260758162A0BD20030A437 /* ship.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F260757162A0BD20030A437 /* ship.plist */; };
+		7F26075C162A0C190030A437 /* Boat.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F26075B162A0C190030A437 /* Boat.mm */; };
+		7F260762162A16D70030A437 /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F260761162A16D70030A437 /* MyContactListener.mm */; };
 		7F7F004016251F83009CE386 /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7F7F003F16251F83009CE386 /* background.jpeg */; };
 		7F8824C2161FDF1100A2FD41 /* GB2ShapeCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */; };
 		7F8824C6161FDF3D00A2FD41 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F8824C5161FDF3D00A2FD41 /* PhysicsSprite.mm */; };
@@ -206,6 +214,22 @@
 		01E0F7351626672E00CF5B48 /* fly.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = fly.plist; path = Resources/fly.plist; sourceTree = "<group>"; };
 		01E0F7361626672E00CF5B48 /* fly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fly.png; path = Resources/fly.png; sourceTree = "<group>"; };
 		01E0F73D1626757600CF5B48 /* streak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = streak.png; path = Resources/streak.png; sourceTree = "<group>"; };
+		01E0F7441626789000CF5B48 /* PolygonSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonSprite.h; sourceTree = "<group>"; };
+		01E0F7451626789000CF5B48 /* PolygonSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PolygonSprite.mm; sourceTree = "<group>"; };
+		01E0F7461626789000CF5B48 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
+		01E0F7471626789000CF5B48 /* PRFilledPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRFilledPolygon.m; sourceTree = "<group>"; };
+		01E0F7481626789000CF5B48 /* PRRatcliffTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRRatcliffTriangulator.h; sourceTree = "<group>"; };
+		01E0F7491626789000CF5B48 /* PRRatcliffTriangulator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PRRatcliffTriangulator.mm; sourceTree = "<group>"; };
+		01E0F74A1626789000CF5B48 /* PRTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRTriangulator.h; sourceTree = "<group>"; };
+		01E0F74B1626789000CF5B48 /* triangulate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangulate.cpp; sourceTree = "<group>"; };
+		01E0F74C1626789000CF5B48 /* triangulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangulate.h; sourceTree = "<group>"; };
+		01E0F74D1626789000CF5B48 /* RaycastCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaycastCallback.h; sourceTree = "<group>"; };
+		7F260754162A0B540030A437 /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship.png; sourceTree = "<group>"; };
+		7F260757162A0BD20030A437 /* ship.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ship.plist; sourceTree = "<group>"; };
+		7F26075A162A0C190030A437 /* Boat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Boat.h; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Boat.h"; sourceTree = "<group>"; };
+		7F26075B162A0C190030A437 /* Boat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Boat.mm; path = "../../../../../../../Users/bkrochik/Documents/workspace-xcode/CotoApps/Sailboat/Sailboat/Boat.mm"; sourceTree = "<group>"; };
+		7F260761162A16D70030A437 /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
+		7F260763162A16E30030A437 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
 		7F7F003F16251F83009CE386 /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
 		7F8824C0161FDF1100A2FD41 /* GB2ShapeCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GB2ShapeCache.h; sourceTree = "<group>"; };
 		7F8824C1161FDF1100A2FD41 /* GB2ShapeCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GB2ShapeCache.mm; sourceTree = "<group>"; };
@@ -607,6 +631,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01E0F7431626789000CF5B48 /* PRKit */ = {
+			isa = PBXGroup;
+			children = (
+				01E0F7441626789000CF5B48 /* PolygonSprite.h */,
+				01E0F7451626789000CF5B48 /* PolygonSprite.mm */,
+				01E0F7461626789000CF5B48 /* PRFilledPolygon.h */,
+				01E0F7471626789000CF5B48 /* PRFilledPolygon.m */,
+				01E0F7481626789000CF5B48 /* PRRatcliffTriangulator.h */,
+				01E0F7491626789000CF5B48 /* PRRatcliffTriangulator.mm */,
+				01E0F74A1626789000CF5B48 /* PRTriangulator.h */,
+				01E0F74B1626789000CF5B48 /* triangulate.cpp */,
+				01E0F74C1626789000CF5B48 /* triangulate.h */,
+			);
+			path = PRKit;
+			sourceTree = "<group>";
+		};
+		7F260759162A0BD70030A437 /* sprites */ = {
+			isa = PBXGroup;
+			children = (
+				01E0F7361626672E00CF5B48 /* fly.png */,
+				7FFE29FF161E0478003AC7A6 /* blocks.png */,
+				01E0F73D1626757600CF5B48 /* streak.png */,
+				7FFCD8FF161E8D2000C50ACB /* water.jpeg */,
+				7F8824C8161FDF5C00A2FD41 /* egg.png */,
+				7F260754162A0B540030A437 /* ship.png */,
+			);
+			name = sprites;
+			sourceTree = "<group>";
+		};
 		7F8824BF161FDF1100A2FD41 /* generic-box2d-plist */ = {
 			isa = PBXGroup;
 			children = (
@@ -654,22 +707,28 @@
 		7FFE27D9161E0472003AC7A6 /* Sailboat */ = {
 			isa = PBXGroup;
 			children = (
+				01E0F7431626789000CF5B48 /* PRKit */,
 				7F8824BF161FDF1100A2FD41 /* generic-box2d-plist */,
+				01E0F74D1626789000CF5B48 /* RaycastCallback.h */,
+				7F260763162A16E30030A437 /* MyContactListener.h */,
+				7F260761162A16D70030A437 /* MyContactListener.mm */,
 				7FFE29F3161E0478003AC7A6 /* AppDelegate.h */,
 				7FFE29F4161E0478003AC7A6 /* AppDelegate.mm */,
 				7FFE29F6161E0478003AC7A6 /* WorldLayer.h */,
 				7FFE29F7161E0478003AC7A6 /* WorldLayer.mm */,
+				7F26075A162A0C190030A437 /* Boat.h */,
+				7F26075B162A0C190030A437 /* Boat.mm */,
 				7FFE29F9161E0478003AC7A6 /* IntroLayer.h */,
 				7FFE29FA161E0478003AC7A6 /* IntroLayer.mm */,
 				7FFE29FC161E0478003AC7A6 /* GLES-Render.h */,
 				7FFE29FD161E0478003AC7A6 /* GLES-Render.mm */,
 				7FFCD8F7161E745A00C50ACB /* Terrain.h */,
 				7FFCD8F9161E748400C50ACB /* Terrain.mm */,
+				01E0F7201626025A00CF5B48 /* MiniGameCutBird.h */,
+				01E0F724162602BE00CF5B48 /* MiniGameCutBird.mm */,
 				7FFE27DA161E0472003AC7A6 /* Resources */,
 				7FFE27F8161E0472003AC7A6 /* libs */,
 				7FFE29EF161E0478003AC7A6 /* Supporting Files */,
-				01E0F7201626025A00CF5B48 /* MiniGameCutBird.h */,
-				01E0F724162602BE00CF5B48 /* MiniGameCutBird.mm */,
 			);
 			path = Sailboat;
 			sourceTree = "<group>";
@@ -677,14 +736,12 @@
 		7FFE27DA161E0472003AC7A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				01E0F73D1626757600CF5B48 /* streak.png */,
+				7F260759162A0BD70030A437 /* sprites */,
+				7F260757162A0BD20030A437 /* ship.plist */,
 				01E0F7351626672E00CF5B48 /* fly.plist */,
-				01E0F7361626672E00CF5B48 /* fly.png */,
 				01E0F7321626669200CF5B48 /* coast.jpeg */,
 				7F8824C7161FDF5C00A2FD41 /* egg.plist */,
-				7F8824C8161FDF5C00A2FD41 /* egg.png */,
 				7F7F003F16251F83009CE386 /* background.jpeg */,
-				7FFCD8FF161E8D2000C50ACB /* water.jpeg */,
 				7FFE27DB161E0472003AC7A6 /* Default.png */,
 				7FFE27DD161E0472003AC7A6 /* Default@2x.png */,
 				7FFE27DF161E0472003AC7A6 /* Default-568h@2x.png */,
@@ -700,7 +757,6 @@
 				7FFE27F3161E0472003AC7A6 /* Icon@2x.png */,
 				7FFE27F5161E0472003AC7A6 /* Info.plist */,
 				7FFE27F6161E0472003AC7A6 /* iTunesArtwork */,
-				7FFE29FF161E0478003AC7A6 /* blocks.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1289,6 +1345,8 @@
 				01E0F7371626672E00CF5B48 /* fly.plist in Resources */,
 				01E0F7381626672E00CF5B48 /* fly.png in Resources */,
 				01E0F73E1626757600CF5B48 /* streak.png in Resources */,
+				7F260755162A0B540030A437 /* ship.png in Resources */,
+				7F260758162A0BD20030A437 /* ship.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1456,6 +1514,12 @@
 				7F8824C2161FDF1100A2FD41 /* GB2ShapeCache.mm in Sources */,
 				7F8824C6161FDF3D00A2FD41 /* PhysicsSprite.mm in Sources */,
 				01E0F725162602BE00CF5B48 /* MiniGameCutBird.mm in Sources */,
+				01E0F74E1626789000CF5B48 /* PolygonSprite.mm in Sources */,
+				01E0F74F1626789000CF5B48 /* PRFilledPolygon.m in Sources */,
+				01E0F7501626789000CF5B48 /* PRRatcliffTriangulator.mm in Sources */,
+				01E0F7511626789000CF5B48 /* triangulate.cpp in Sources */,
+				7F26075C162A0C190030A437 /* Boat.mm in Sources */,
+				7F260762162A16D70030A437 /* MyContactListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 #import "GLES-Render.h"
 //Terrain effects
 #import "Terrain.h"
+#import "Boat.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -26,7 +27,7 @@
 @interface WorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
     Terrain * _wave;
-    Terrain * _wave2;
+    Boat * _boat;
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref

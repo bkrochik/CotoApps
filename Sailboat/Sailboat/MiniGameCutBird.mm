@@ -58,6 +58,8 @@ struct fixtureUserData {
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
         [self initPhysics];
+       // [self initSprites];
+        _raycastCallback = new RaycastCallback();
         
         //Set the score to zero.
         score = 0;
@@ -191,17 +193,17 @@ struct fixtureUserData {
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector] convertToGL:location];
         _endPoint = location;
-//        if (ccpLengthSQ(ccpSub(_startPoint, _endPoint)) > 25)
-//        {
-//            world->RayCast(_raycastCallback,
-//                           b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO),
-//                           b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO));
-//            
-//            world->RayCast(_raycastCallback,
-//                           b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO),
-//                           b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO));
-//            _startPoint = _endPoint;
-//        }
+        if (ccpLengthSQ(ccpSub(_startPoint, _endPoint)) > 25)
+        {
+            world->RayCast(_raycastCallback,
+                           b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO),
+                           b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO));
+            
+            world->RayCast(_raycastCallback,
+                           b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO),
+                           b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO));
+            _startPoint = _endPoint;
+        }
     }
 }
 

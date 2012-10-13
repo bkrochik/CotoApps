@@ -60,6 +60,9 @@ enum {
         //Generate Terrain
         [self addChild:_wave z:1];
         
+        _boat=[Boat nodeWithBoatType:1:world];
+        //Generate Boat
+        [self addChild:_boat z:1];
         
         //_wave2 = [Terrain nodeWithTerrainType:2:world];
         //[self addChild:_wave2 z:1];
@@ -185,7 +188,7 @@ enum {
     }
     
     //move waves
-    float PIXELS_PER_SECOND = 70;
+    float PIXELS_PER_SECOND = 100;
     offset += PIXELS_PER_SECOND * dt;
     [_wave setOffsetX:offset];
     self.position = CGPointMake(-offset, 0);
@@ -209,29 +212,7 @@ enum {
     for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
 		location = [[CCDirector sharedDirector] convertToGL: location];
-        [self createBall:location];
-	}
-}
-
--(void) createBall:(CGPoint)p
-{
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    CCSprite *_newBall;
-    _newBall = [CCSprite spriteWithFile:@"egg.png" rect:CGRectMake(0, 0, 43/CC_CONTENT_SCALE_FACTOR(), 49/CC_CONTENT_SCALE_FACTOR())];
-    _newBall.position = ccp(0, 0);
-    _newBall.scale=CC_CONTENT_SCALE_FACTOR();
-    [self addChild:_newBall  z:0 tag:2];
-    
-    // Create ball body and shape new
-    b2BodyDef newBallBodyDef;
-    newBallBodyDef.type = b2_dynamicBody;
-    newBallBodyDef.position.Set((p.x+offset)/PTM_RATIO,p.y/PTM_RATIO);
-    newBallBodyDef.userData = _newBall;
-    b2Body *body = world->CreateBody(&newBallBodyDef);
-    
-    [[GB2ShapeCache sharedShapeCache]   addShapesWithFile:@"egg.plist"];
-    [[GB2ShapeCache sharedShapeCache] addFixturesToBody:body forShapeName:@"egg"];
-    [_newBall setAnchorPoint: [[GB2ShapeCache sharedShapeCache] anchorPointForShape:@"egg"]];
+    }
 }
 
 #pragma mark GameKit delegate
