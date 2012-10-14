@@ -230,6 +230,7 @@ enum {
             CCSprite *spData = (CCSprite *)b->GetUserData();
             spData.position = ccp(b->GetPosition().x * PTM_RATIO,
                                   b->GetPosition().y * PTM_RATIO);
+          
             spData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
             
             //if i get the boat i will check the status
@@ -239,11 +240,15 @@ enum {
     }
     
     if(!pauseWave){
+        
+        /****** //TODO MOVE TO ANOTHER CLASS ******/
         float intensity=0.5;
         float hard=1;
         //Score hard
         if(score>40){
             hard=score/40;
+            if(hard>2)
+                hard=2;
         }
         
         //Moving Waves
@@ -271,7 +276,7 @@ enum {
 //Check body status
 - (void)checkStatus:(b2Body*) b:(int)off {
     float bodyAngle=CC_RADIANS_TO_DEGREES(b->GetAngle());
-    if((-bodyAngle>MAXANGLE && _contactListener->_contacts.size()>1) || (b->GetPosition().x*PTM_RATIO)<(off-90*CC_CONTENT_SCALE_FACTOR())){
+    if((abs(bodyAngle)>MAXANGLE && _contactListener->_contacts.size()>1) || (b->GetPosition().x*PTM_RATIO)<(off-90*CC_CONTENT_SCALE_FACTOR())){
         if(!gameOver){
             [self createExplosionX:b2Vec2(b->GetPosition().x*PTM_RATIO,b->GetPosition().y*PTM_RATIO)];
             [[CCDirector sharedDirector] replaceScene:

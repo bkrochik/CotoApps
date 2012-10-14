@@ -41,6 +41,7 @@
     b2World *_world;
     b2Body *_body;
     BOOL pause;
+    int rangeY;
     
     // Texture
     CCTexture2D *texture;
@@ -48,6 +49,7 @@
 
 - (void) setOffsetX:(float)newOffsetX;
 - (void) setPause:(BOOL)pause;
+- (void) setRangeY:(int)range;
 
 @end
 

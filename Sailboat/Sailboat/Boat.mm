@@ -32,6 +32,7 @@
     _boat.position = ccp(0, 0);
     _boat.tag=BOAT;
     _boat.scale=CC_CONTENT_SCALE_FACTOR();
+    
     [self addChild:_boat  z:0];
     
     // Create ball body and shape new
@@ -40,7 +41,13 @@
     boatBodyDef.position.Set((200)/PTM_RATIO,200/PTM_RATIO);
     boatBodyDef.userData = _boat;
     _body = _world->CreateBody(&boatBodyDef);
-    //body->SetLinearVelocity(b2Vec2(3.0f, 0.0f));
+    //Setting mass
+    b2MassData massData;
+    _body->GetMassData(&massData);
+    float scaleFactor = 10000 / massData.mass;
+    massData.mass *= scaleFactor;
+    massData.I *= scaleFactor;
+    _body->SetMassData(&massData);
     
     [[GB2ShapeCache sharedShapeCache]   addShapesWithFile:@"ship.plist"];
     [[GB2ShapeCache sharedShapeCache] addFixturesToBody:_body forShapeName:@"ship"];
@@ -84,7 +91,7 @@
         if(speedX>1)
             speedX=1;
         
-        float vel=(2.5*CC_CONTENT_SCALE_FACTOR());
+        float vel=(2.2*CC_CONTENT_SCALE_FACTOR());
         
         b2Vec2 currentVelocity = _body->GetLinearVelocity();
         b2Vec2 newVelocity = b2Vec2((currentVelocity.x +vel)*speedX,(currentVelocity.y +vel)*speedY);

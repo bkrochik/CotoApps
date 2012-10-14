@@ -19,7 +19,7 @@
 			<array>
 				<dict>
 					<key>density</key>
-					<integer>2</integer>
+					<integer>100</integer>
 					<key>friction</key>
 					<string>0</string>
 					<key>restitution</key>

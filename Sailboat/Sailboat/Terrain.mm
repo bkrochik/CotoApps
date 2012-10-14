@@ -7,11 +7,12 @@
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
-    float minDX = 160;
+    float minDX = 130;
     float minDY = 60;
     int rangeDX = 80;
-    int rangeDY = 40;
+    int rangeDY = rangeY;
     
+    /*
     switch (_terrainType) {
         case 1:
             rangeDX = 80;
@@ -28,7 +29,7 @@
         default:
             break;
     }
-    
+    */
     float x = -minDX;
     float y = winSize.height/2-minDY;
 
@@ -166,6 +167,7 @@
     _world = world;
     _terrainType=terrainType;
     pause=true;
+    rangeY=45;
     texture = [[CCTextureCache sharedTextureCache] addImage:@"water.jpeg"];
 
     if ((self = [super init])) {
@@ -233,6 +235,10 @@
 
 - (void) setPause:(BOOL)status {
     pause=status;
+}
+
+- (void) setRangeY:(int)range {
+    rangeY=range;
 }
 
 - (void)dealloc {
