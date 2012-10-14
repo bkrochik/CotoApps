@@ -2,7 +2,6 @@
 #import "WorldLayer.h"
 
 @implementation Terrain
-@synthesize stripes = _stripes;
 
 - (void) generateTerrain{
     
@@ -16,7 +15,7 @@
     switch (_terrainType) {
         case 1:
             rangeDX = 80;
-            rangeDY = 50;
+            rangeDY = 40;
             minDY = 80;
             minDX = 130;
             break;
@@ -166,6 +165,7 @@
 {
     _world = world;
     _terrainType=terrainType;
+    pause=true;
     texture = [[CCTextureCache sharedTextureCache] addImage:@"water.jpeg"];
 
     if ((self = [super init])) {
@@ -227,12 +227,16 @@
     _offsetX = newOffsetX;
     //self.position = CGPointMake(-_offsetX*self.scale, 0);
     //reset waves
-    [self resetTerrainVertices];
+    if(pause==false)
+        [self resetTerrainVertices];
+}
+
+- (void) setPause:(BOOL)status {
+    pause=status;
 }
 
 - (void)dealloc {
-    [_stripes release];
-    _stripes = NULL;
+    _body =NULL;
     [super dealloc];
     
     delete m_debugDraw;

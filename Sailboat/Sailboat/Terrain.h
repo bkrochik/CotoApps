@@ -29,9 +29,6 @@
     int _toKeyPointI;
     
     CGPoint _waveKeyPoints[kMaxWaveKeyPoints];
-    CCSprite *_stripes;
-    GLint waveTex;
-    
     int _nWaveVertices;
     CGPoint _waveVertices[kMaxWaveVertices];
     CGPoint _waveTexCoords[kMaxWaveVertices];
@@ -43,14 +40,15 @@
     
     b2World *_world;
     b2Body *_body;
-    GLESDebugDraw * _debugDraw;
+    BOOL pause;
     
     // Texture
     CCTexture2D *texture;
 }
 
-@property (retain) CCSprite * stripes;
-    - (void) setOffsetX:(float)newOffsetX;
+- (void) setOffsetX:(float)newOffsetX;
+- (void) setPause:(BOOL)pause;
+
 @end
 
 #endif

@@ -44,12 +44,33 @@ enum {
 -(id) init
 {
 	if( (self=[super init])) {
+        
 		// enable events
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
 		CGSize s = [CCDirector sharedDirector].winSize;
         width=s.width;
         height=s.height;
+        
+        //init vars
+        pauseWave=true;
+        gameOver=false;
+        
+        // Create contact listener
+        _contactListener = new MyContactListener();
+        
+        //Create and add the life label as a child.
+        score=0;
+        scoreLabel = [CCLabelTTF labelWithString:@"Distancia: 0m" fontName:@"Marker Felt" fontSize:24];
+        //Create and add the score label as a child.
+        if(CC_CONTENT_SCALE_FACTOR()==1.0f){
+            scoreLabel.position = ccp(s.width-(100*CC_CONTENT_SCALE_FACTOR()), (s.height-(20*CC_CONTENT_SCALE_FACTOR())));
+        }else{
+            scoreLabel.position = ccp(s.width-(48*CC_CONTENT_SCALE_FACTOR()), (s.height-(12*CC_CONTENT_SCALE_FACTOR())));
+        }
+        
+        [self addChild:scoreLabel z:1];
+        
 		// init physics
 		[self initPhysics];
         
@@ -60,12 +81,11 @@ enum {
         //Generate Terrain
         [self addChild:_wave z:1];
         
-        _boat=[Boat nodeWithBoatType:1:world];
+         world->SetContactListener(_contactListener);
+        _boat=[Boat nodeWithBoatType:1:world:_contactListener];
+        
         //Generate Boat
         [self addChild:_boat z:1];
-        
-        //_wave2 = [Terrain nodeWithTerrainType:2:world];
-        //[self addChild:_wave2 z:1];
         
 		[self scheduleUpdate];
 	}
@@ -76,9 +96,11 @@ enum {
 {
 	delete world;
 	world = NULL;
-	
+    _wave =NULL;
+    _boat =NULL;
+    
 	[super dealloc];
-}	
+}
 
 -(void) createMenu
 {
@@ -174,6 +196,32 @@ enum {
 	//groundBody->CreateFixture(&groundBox,0);
 }
 
+//Create an explosion
+-(void) createExplosionX:(b2Vec2) point
+{
+    emitter_ = [CCParticleFire node];
+	[self addChild:emitter_ z:10];
+    
+    emitter_.position = ccp(point.x ,point.y );
+    
+	emitter_.texture = [[CCTextureCache sharedTextureCache] addImage:@"fire.pvr"];
+    
+    //set size of particle animation
+    emitter_.scale = 1.5;
+    
+    //set length of particle animation
+    [emitter_ setLife:0.7f];
+    
+    [emitter_ setDuration:0.1f];
+    
+}
+
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    pauseWave=false;
+    [_wave setPause:false];
+}
+
 -(void) update: (ccTime) dt
 {
     world->Step(dt/CC_CONTENT_SCALE_FACTOR(), 10, 10);
@@ -183,17 +231,54 @@ enum {
             spData.position = ccp(b->GetPosition().x * PTM_RATIO,
                                   b->GetPosition().y * PTM_RATIO);
             spData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+            
+            //if i get the boat i will check the status
+            if(spData.tag==BOAT)
+                [self checkStatus:b:offset];
         }
-        
     }
     
-    //move waves
-    float PIXELS_PER_SECOND = 100;
-    offset += PIXELS_PER_SECOND * dt;
-    [_wave setOffsetX:offset];
-    self.position = CGPointMake(-offset, 0);
-    _background.position=ccp(offset+(width/2),height/1.5);
-    //[_wave2 setOffsetX:offsetWave2];
+    if(!pauseWave){
+        float intensity=0.5;
+        float hard=1;
+        //Score hard
+        if(score>40){
+            hard=score/40;
+        }
+        
+        //Moving Waves
+        float PIXELS_PER_SECOND = (100*CC_CONTENT_SCALE_FACTOR())*(1+intensity*hard);
+        offset += PIXELS_PER_SECOND * (dt/CC_CONTENT_SCALE_FACTOR());
+        [_wave setOffsetX:offset];
+        self.position = CGPointMake(-offset, 0);
+        
+        //Moving Background
+        _background.position=ccp(offset+(width/2),height/1.5);
+
+        //Moving score label
+        if(CC_CONTENT_SCALE_FACTOR()==1.0f){
+            scoreLabel.position = ccp(offset+width-(100*CC_CONTENT_SCALE_FACTOR()), (height-(20*CC_CONTENT_SCALE_FACTOR())));
+        }else{
+            scoreLabel.position = ccp(offset+width-(48*CC_CONTENT_SCALE_FACTOR()), (height-(12*CC_CONTENT_SCALE_FACTOR())));
+        }
+        
+        //Updating Score
+        score = offset/(50*CC_CONTENT_SCALE_FACTOR()); //I think: score++; will also work.
+        [scoreLabel setString:[NSString stringWithFormat:@"Distancia: %dm", score]];
+    }
+}
+
+//Check body status
+- (void)checkStatus:(b2Body*) b:(int)off {
+    float bodyAngle=CC_RADIANS_TO_DEGREES(b->GetAngle());
+    if((-bodyAngle>MAXANGLE && _contactListener->_contacts.size()>1) || (b->GetPosition().x*PTM_RATIO)<(off-90*CC_CONTENT_SCALE_FACTOR())){
+        if(!gameOver){
+            [self createExplosionX:b2Vec2(b->GetPosition().x*PTM_RATIO,b->GetPosition().y*PTM_RATIO)];
+            [[CCDirector sharedDirector] replaceScene:
+                [CCTransitionFlipX transitionWithDuration:2.0f scene:[GameOverLayer scene]]];
+        }
+        gameOver=true;
+    }
 }
 
 - (void)genBackground {
@@ -201,18 +286,11 @@ enum {
 
     [_background removeFromParentAndCleanup:YES];
     _background = [CCSprite spriteWithFile:@"background.jpeg"];
-    _background.position = ccp(winSize.width/2, winSize.height/2);
+    _background.position = ccp(winSize.width/2, winSize.height/1.5);
     //ccTexParams tp = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
     //[_background.texture setTexParameters:&tp];
     
     [self addChild:_background];
-}
-
--(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    for( UITouch *touch in touches ) {
-		CGPoint location = [touch locationInView: [touch view]];
-		location = [[CCDirector sharedDirector] convertToGL: location];
-    }
 }
 
 #pragma mark GameKit delegate

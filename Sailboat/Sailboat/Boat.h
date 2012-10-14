@@ -15,6 +15,7 @@
 #import "MyContactListener.h"
 
 #define PTM_RATIO 32
+#define BOAT 5
 
 @interface Boat  : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate> {
     b2World *_world;

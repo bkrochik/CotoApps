@@ -16,10 +16,11 @@
 
 @implementation Boat
 
-- (id)initWithBoatType:(int)terrainType:(b2World *)world
+- (id)initWithBoatType:(int)terrainType:(b2World *)world:(MyContactListener*)myContactListener
 {
 	if( (self=[super init])) {
         _world=world;
+        _contactListener=myContactListener;
 		// enable events
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
@@ -29,13 +30,14 @@
     CCSprite *_boat;
     _boat = [CCSprite spriteWithFile:@"ship.png" rect:CGRectMake(0, 0, 100/CC_CONTENT_SCALE_FACTOR(), 37/CC_CONTENT_SCALE_FACTOR())];
     _boat.position = ccp(0, 0);
+    _boat.tag=BOAT;
     _boat.scale=CC_CONTENT_SCALE_FACTOR();
-    [self addChild:_boat  z:0 tag:2];
+    [self addChild:_boat  z:0];
     
     // Create ball body and shape new
     b2BodyDef boatBodyDef;
     boatBodyDef.type = b2_dynamicBody;
-    boatBodyDef.position.Set((200)/PTM_RATIO,100/PTM_RATIO);
+    boatBodyDef.position.Set((200)/PTM_RATIO,200/PTM_RATIO);
     boatBodyDef.userData = _boat;
     _body = _world->CreateBody(&boatBodyDef);
     //body->SetLinearVelocity(b2Vec2(3.0f, 0.0f));
@@ -43,10 +45,6 @@
     [[GB2ShapeCache sharedShapeCache]   addShapesWithFile:@"ship.plist"];
     [[GB2ShapeCache sharedShapeCache] addFixturesToBody:_body forShapeName:@"ship"];
     [_boat setAnchorPoint: [[GB2ShapeCache sharedShapeCache] anchorPointForShape:@"ship"]];
-    
-    // Create contact listener
-    _contactListener = new MyContactListener();
-    world->SetContactListener(_contactListener);
     
     [self scheduleUpdate];
     
@@ -66,26 +64,32 @@
     touchStart=false;
 }
 
-+ (id)nodeWithBoatType:(int)terrainType:(b2World *)world{
-    return  [[[self alloc] initWithBoatType:terrainType:world] autorelease];
++ (id)nodeWithBoatType:(int)terrainType:(b2World *)world:(MyContactListener*)myContactListener{
+    return  [[[self alloc] initWithBoatType:terrainType:world:myContactListener] autorelease];
+}
+
+- (void)dealloc {
+    _body =NULL;
+    [super dealloc];
 }
 
 -(void) update:(ccTime)delta
-{
-    /*
-    std::vector<b2Body *>toDestroy;
-    std::vector<MyContact>::iterator pos;
-    for(pos = _contactListener->_contacts.begin(); pos != _contactListener->_contacts.end(); ++pos) {
-         NSLog(@"-----%d-----",_contactListener->_contacts.size());
-    }*/
-   
+{   
     if(touchStart && _contactListener->_contacts.size()>1){
+        float angle=_body->GetAngle();
+        float speedY=sin(angle);
+        float speedX=cos(angle);
+        if(speedY>1)
+            speedY=1;
+        if(speedX>1)
+            speedX=1;
+        
+        float vel=(2.5*CC_CONTENT_SCALE_FACTOR());
+        
         b2Vec2 currentVelocity = _body->GetLinearVelocity();
-        b2Vec2 newVelocity = b2Vec2(currentVelocity.x +1.5, 0);
-        if(currentVelocity.x<=18)
+        b2Vec2 newVelocity = b2Vec2((currentVelocity.x +vel)*speedX,(currentVelocity.y +vel)*speedY);
+        if(currentVelocity.x<=(40*CC_CONTENT_SCALE_FACTOR()))
             _body->SetLinearVelocity( newVelocity );
     }
-	//b2Vec2 forceA = b2Vec2(0, -_body->GetMass() * _world->GetGravity().y);
-   // _body->ApplyForce(forceA, _body->GetWorldCenter() );
 }
 @end
