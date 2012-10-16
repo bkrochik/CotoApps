@@ -23,5 +23,5 @@
     BOOL touchStart;
     MyContactListener *_contactListener;
 }
-
+- (void) pullBoat:(int)force;
 @end

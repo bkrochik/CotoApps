@@ -41,12 +41,14 @@
     boatBodyDef.position.Set((200)/PTM_RATIO,200/PTM_RATIO);
     boatBodyDef.userData = _boat;
     _body = _world->CreateBody(&boatBodyDef);
+    
     //Setting mass
     b2MassData massData;
     _body->GetMassData(&massData);
     float scaleFactor = 10000 / massData.mass;
     massData.mass *= scaleFactor;
     massData.I *= scaleFactor;
+    massData.center.Set(50.0f,1);
     _body->SetMassData(&massData);
     
     [[GB2ShapeCache sharedShapeCache]   addShapesWithFile:@"ship.plist"];
@@ -56,6 +58,10 @@
     [self scheduleUpdate];
     
 	return self;
+}
+
+- (void) pullBoat:(int)force{
+    _body->SetAngularVelocity(force);
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -91,11 +97,11 @@
         if(speedX>1)
             speedX=1;
         
-        float vel=(2.2*CC_CONTENT_SCALE_FACTOR());
+        float vel=(2.5*CC_CONTENT_SCALE_FACTOR());
         
         b2Vec2 currentVelocity = _body->GetLinearVelocity();
         b2Vec2 newVelocity = b2Vec2((currentVelocity.x +vel)*speedX,(currentVelocity.y +vel)*speedY);
-        if(currentVelocity.x<=(40*CC_CONTENT_SCALE_FACTOR()))
+        if(currentVelocity.x<=(30*CC_CONTENT_SCALE_FACTOR()))
             _body->SetLinearVelocity( newVelocity );
     }
 }

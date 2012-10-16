@@ -42,10 +42,13 @@
     Terrain * _terrain;
     float width;
     float height;
-    CCLabelTTF *scoreLabel;
     int score;
     CCParticleSystem	*emitter_;
     MyContactListener *_contactListener;
+    
+    //HUB Layer //TODO:MOVE TO ANOTHER CLASS
+    CCLabelTTF *scoreLabel;
+    CCMenu *boatMenu;
 }
 
 // returns a CCScene that contains as the only child

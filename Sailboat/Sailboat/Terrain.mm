@@ -7,29 +7,32 @@
     
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
-    float minDX = 130;
+    float minDX = 280;
     float minDY = 60;
     int rangeDX = 80;
-    int rangeDY = rangeY;
+    int rangeDY = 45;
     
-    /*
-    switch (_terrainType) {
+    switch (_level) {
         case 1:
+            minDX = 280;
+            minDY = 60;
             rangeDX = 80;
-            rangeDY = 40;
-            minDY = 80;
-            minDX = 130;
+            rangeDY = 45;
             break;
         case 2:
-            rangeDX = 30;
-            rangeDY = 20;
-            minDY = 100;
-            minDX = 200;
+            minDX = 140;
+            minDY = 60;
+            rangeDX = 80;
+            rangeDY = 45;
             break;
         default:
+            rangeDX = 120;
+            rangeDY = 60;
+            minDY = 80;
+            minDX = 45;
             break;
     }
-    */
+    
     float x = -minDX;
     float y = winSize.height/2-minDY;
 
@@ -56,7 +59,6 @@
         }
         sign *= -1;
     }
-    
 }
 
 - (void) resetBox2DBody {
@@ -167,7 +169,7 @@
     _world = world;
     _terrainType=terrainType;
     pause=true;
-    rangeY=45;
+    _level=2;
     texture = [[CCTextureCache sharedTextureCache] addImage:@"water.jpeg"];
 
     if ((self = [super init])) {
@@ -237,8 +239,9 @@
     pause=status;
 }
 
-- (void) setRangeY:(int)range {
-    rangeY=range;
+- (void) setDifficulty:(int)level {
+    _level=level;
+    [self generateTerrain];
 }
 
 - (void)dealloc {

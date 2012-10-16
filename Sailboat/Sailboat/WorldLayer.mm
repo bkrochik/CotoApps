@@ -59,6 +59,9 @@ enum {
         // Create contact listener
         _contactListener = new MyContactListener();
         
+        //Create pull front button
+        [self createPullBtn];
+        
         //Create and add the life label as a child.
         score=0;
         scoreLabel = [CCLabelTTF labelWithString:@"Distancia: 0m" fontName:@"Marker Felt" fontSize:24];
@@ -79,9 +82,9 @@ enum {
         
         _wave=[Terrain nodeWithTerrainType:1:world];
         //Generate Terrain
-        [self addChild:_wave z:1];
+        [self addChild:_wave z:3];
         
-         world->SetContactListener(_contactListener);
+        world->SetContactListener(_contactListener);
         _boat=[Boat nodeWithBoatType:1:world:_contactListener];
         
         //Generate Boat
@@ -96,65 +99,44 @@ enum {
 {
 	delete world;
 	world = NULL;
+    boatMenu=NULL;
     _wave =NULL;
     _boat =NULL;
     
 	[super dealloc];
 }
 
--(void) createMenu
+//Create pull boat btn
+-(void) createPullBtn
 {
-	// Default font size will be 22 points.
-	[CCMenuItemFont setFontSize:22];
-	
-	// Reset Button
-	CCMenuItemLabel *reset = [CCMenuItemFont itemWithString:@"Reset" block:^(id sender){
-		[[CCDirector sharedDirector] replaceScene: [WorldLayer scene]];
-	}];
-	
-	// Achievement Menu Item using blocks
-	CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-		
-		
-		GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-		achivementViewController.achievementDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:achivementViewController animated:YES];
-		
-		[achivementViewController release];
-	}];
-	
-	// Leaderboard Menu Item using blocks
-	CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-		
-		
-		GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-		leaderboardViewController.leaderboardDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-		
-		[leaderboardViewController release];
-	}];
-	
-	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, reset, nil];
-	
-	[menu alignItemsVertically];
-	
-	CGSize size = [[CCDirector sharedDirector] winSize];
-	[menu setPosition:ccp( size.width/2, size.height/2)];
-	
-	
-	[self addChild: menu z:-1];	
+    // Standard method to create a button
+    CCMenuItem *pullBtnUp = [CCMenuItemImage itemFromNormalImage:@"red_btn.png" selectedImage:@"purple_btn.png"
+                                                          target:self selector:@selector(pullBoatUP:)];
+    pullBtnUp.scale=0.15;
+    pullBtnUp.position = ccp(40*CC_CONTENT_SCALE_FACTOR(),height-(30*CC_CONTENT_SCALE_FACTOR()));
+    CCMenuItem *pullBtnDown = [CCMenuItemImage itemFromNormalImage:@"red_btn.png" selectedImage:@"purple_btn.png"
+                                                            target:self selector:@selector(pullBoatDOWN:)];
+    pullBtnDown.scale=0.15;
+    pullBtnDown.position = ccp(100*CC_CONTENT_SCALE_FACTOR(),height-(30*CC_CONTENT_SCALE_FACTOR()));
+    boatMenu = [CCMenu menuWithItems:pullBtnDown,pullBtnUp, nil];
+    boatMenu.position = CGPointZero;
+    [self addChild:boatMenu z:1];
+}
+
+//Call pull boat method UP
+- (void)pullBoatUP:(id)sender{
+    [_boat pullBoat:2];
+}
+
+//Call pull boat method DOWN
+- (void)pullBoatDOWN:(id)sender{
+    [_boat pullBoat:-2];
 }
 
 -(void) initPhysics
 {
-
-	CGSize s = [CCDirector sharedDirector].winSizeInPixels;
+    
+	CGSize s = [CCDirector sharedDirector].winSize;
 	
 	b2Vec2 gravity;
 	gravity.Set(0.0f, -10.0f);
@@ -176,7 +158,7 @@ enum {
 	b2Body* groundBody = world->CreateBody(&groundBodyDef);
 	
 	// Define the ground box shape.
-	b2EdgeShape groundBox;		
+	b2EdgeShape groundBox;
 	
 	// bottom
 	
@@ -224,42 +206,48 @@ enum {
 
 -(void) update: (ccTime) dt
 {
+    int boatOffset;
+    
+    /****** //TODO MOVE TO ANOTHER CLASS ******/
+    float intensity=0.5;
+    float hard=1;
+    //Score hard
+    if(score>40){
+        hard=score/40;
+        if(hard>2 && hard<=3){
+            hard=2;
+        }
+    }
+    
     world->Step(dt/CC_CONTENT_SCALE_FACTOR(), 10, 10);
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() !=(void*)-1) {
             CCSprite *spData = (CCSprite *)b->GetUserData();
             spData.position = ccp(b->GetPosition().x * PTM_RATIO,
                                   b->GetPosition().y * PTM_RATIO);
-          
             spData.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
-            
             //if i get the boat i will check the status
-            if(spData.tag==BOAT)
+            if(spData.tag==BOAT){
+               // boatOffset=(b->GetPosition().x * PTM_RATIO)-(width/2)+50;
+                /*if((b->GetPosition().x * PTM_RATIO)>(offset+width)){
+                    offset+=100*CC_CONTENT_SCALE_FACTOR();
+                }*/
                 [self checkStatus:b:offset];
+            }
         }
     }
     
     if(!pauseWave){
-        
-        /****** //TODO MOVE TO ANOTHER CLASS ******/
-        float intensity=0.5;
-        float hard=1;
-        //Score hard
-        if(score>40){
-            hard=score/40;
-            if(hard>2)
-                hard=2;
-        }
-        
         //Moving Waves
         float PIXELS_PER_SECOND = (100*CC_CONTENT_SCALE_FACTOR())*(1+intensity*hard);
-        offset += PIXELS_PER_SECOND * (dt/CC_CONTENT_SCALE_FACTOR());
+        
+        offset +=PIXELS_PER_SECOND * (dt/CC_CONTENT_SCALE_FACTOR());
         [_wave setOffsetX:offset];
         self.position = CGPointMake(-offset, 0);
         
         //Moving Background
         _background.position=ccp(offset+(width/2),height/1.5);
-
+        boatMenu.position=ccp(offset,0);
         //Moving score label
         if(CC_CONTENT_SCALE_FACTOR()==1.0f){
             scoreLabel.position = ccp(offset+width-(100*CC_CONTENT_SCALE_FACTOR()), (height-(20*CC_CONTENT_SCALE_FACTOR())));
@@ -280,7 +268,7 @@ enum {
         if(!gameOver){
             [self createExplosionX:b2Vec2(b->GetPosition().x*PTM_RATIO,b->GetPosition().y*PTM_RATIO)];
             [[CCDirector sharedDirector] replaceScene:
-                [CCTransitionFlipX transitionWithDuration:2.0f scene:[GameOverLayer scene]]];
+             [CCTransitionFlipX transitionWithDuration:2.0f scene:[GameOverLayer scene]]];
         }
         gameOver=true;
     }
@@ -288,7 +276,7 @@ enum {
 
 - (void)genBackground {
     CGSize winSize = [CCDirector sharedDirector].winSize;
-
+    
     [_background removeFromParentAndCleanup:YES];
     _background = [CCSprite spriteWithFile:@"background.jpeg"];
     _background.position = ccp(winSize.width/2, winSize.height/1.5);
